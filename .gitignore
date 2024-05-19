@@ -1,2 +1,4 @@
 .DS_Store
 .venv/
+.env
+Langchain_practice.egg-info/
