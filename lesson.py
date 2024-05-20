@@ -61,12 +61,12 @@ for doc in retrieved_docs:
     print(f"\nStart index: {doc.metadata['start_index']} with the content:\n{doc.page_content}")
 
 # Perform a similarity search with scores
-# query = "What are the approaches to Task Decomposition?"
-# docs_and_scores = vectorstore.similarity_search_with_score(query, k=6)
+query = "What are the approaches to Task Decomposition?"
+docs_and_scores = vectorstore.similarity_search_with_score(query, k=6)
 
-# for doc, score in docs_and_scores:
-#     print(f"\nStart index: {doc.metadata['start_index']} \
-#           score: {round(score, 3)} \n{doc.page_content}")
+for doc, score in docs_and_scores:
+    print(f"\nStart index: {doc.metadata['start_index']} \
+          score: {round(score, 3)} \n{doc.page_content}")
 
 
 # prompt = hub.pull("rlm/rag-prompt")
