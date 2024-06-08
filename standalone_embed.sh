@@ -25,6 +25,7 @@ auto-compaction-mode: revision
 auto-compaction-retention: '1000'
 EOF
 
+# Need to change the two -v lines for it to work (remove pwd in both lines)
     sudo docker run -d \
         --name milvus-standalone \
         --security-opt seccomp:unconfined \
@@ -97,6 +98,7 @@ stop() {
 
 }
 
+# This function does not work since still use "pwd" (not tried) 
 delete() {
     res=`sudo docker ps|grep milvus-standalone|wc -l`
     if [ $res -eq 1 ]

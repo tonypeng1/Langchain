@@ -1,16 +1,204 @@
+import random
+
 from pymilvus import MilvusClient, DataType
 
 client = MilvusClient(
     uri="http://localhost:19530"
 )
 
-client.create_collection(
+# client.create_collection(
+#     collection_name="quick_setup",
+#     dimension=5
+# )
+
+client.load_collection(
     collection_name="quick_setup",
-    dimension=5
+    replica_number=1
 )
 
-res = client.get_load_state(
-    collection_name="quick_setup"
+# client.list_collections()
+
+# client.release_collection(
+#     collection_name="quick_setup"
+# )
+
+# res = client.get_load_state(
+#     collection_name="quick_setup"
+# )
+
+# data=[
+#     {"id": 0, "vector": [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], "color": "pink_8682"},
+#     {"id": 1, "vector": [0.19886812562848388, 0.06023560599112088, 0.6976963061752597, 0.2614474506242501, 0.838729485096104], "color": "red_7025"},
+#     {"id": 2, "vector": [0.43742130801983836, -0.5597502546264526, 0.6457887650909682, 0.7894058910881185, 0.20785793220625592], "color": "orange_6781"},
+#     {"id": 3, "vector": [0.3172005263489739, 0.9719044792798428, -0.36981146090600725, -0.4860894583077995, 0.95791889146345], "color": "pink_9298"},
+#     {"id": 4, "vector": [0.4452349528804562, -0.8757026943054742, 0.8220779437047674, 0.46406290649483184, 0.30337481143159106], "color": "red_4794"},
+#     {"id": 5, "vector": [0.985825131989184, -0.8144651566660419, 0.6299267002202009, 0.1206906911183383, -0.1446277761879955], "color": "yellow_4222"},
+#     {"id": 6, "vector": [0.8371977790571115, -0.015764369584852833, -0.31062937026679327, -0.562666951622192, -0.8984947637863987], "color": "red_9392"},
+#     {"id": 7, "vector": [-0.33445148015177995, -0.2567135004164067, 0.8987539745369246, 0.9402995886420709, 0.5378064918413052], "color": "grey_8510"},
+#     {"id": 8, "vector": [0.39524717779832685, 0.4000257286739164, -0.5890507376891594, -0.8650502298996872, -0.6140360785406336], "color": "white_9381"},
+#     {"id": 9, "vector": [0.5718280481994695, 0.24070317428066512, -0.3737913482606834, -0.06726932177492717, -0.6980531615588608], "color": "purple_4976"}
+# ]
+
+# res = client.insert(
+#     collection_name="quick_setup",
+#     data=data
+# )
+
+# colors = ["green", "blue", "yellow", "red", "black", "white", "purple", "pink", "orange", "brown", "grey"]
+# data = [ {
+#     "id": i, 
+#     "vector": [ random.uniform(-1, 1) for _ in range(5) ], 
+#     "color": f"{random.choice(colors)}_{str(random.randint(1000, 9999))}" 
+# } for i in range(1000) ]
+
+# res = client.insert(
+#     collection_name="quick_setup",
+#     data=data[10:]
+# )
+
+# Create partitions and insert more entities
+# client.create_partition(
+#     collection_name="quick_setup",
+#     partition_name="partitionA"
+# )
+
+# client.create_partition(
+#     collection_name="quick_setup",
+#     partition_name="partitionB"
+# )
+
+# colors = ["green", "blue", "yellow", "red", "black", "white", "purple", "pink", "orange", "brown", "grey"]
+# data_partition_1 = [ {
+#     "id": i, 
+#     "vector": [ random.uniform(-1, 1) for _ in range(5) ], 
+#     "color": f"{random.choice(colors)}_{str(random.randint(1000, 9999))}" 
+# } for i in range(1000, 1500) ]
+
+# data_partition_2 = [ {
+#     "id": i, 
+#     "vector": [ random.uniform(-1, 1) for _ in range(5) ], 
+#     "color": f"{random.choice(colors)}_{str(random.randint(1000, 9999))}" 
+# } for i in range(1500, 2000) ]
+
+# res = client.insert(
+#     collection_name="quick_setup",
+#     data=data_partition_1,
+#     partition_name="partitionA"
+# )
+
+# res = client.insert(
+#     collection_name="quick_setup",
+#     data=data_partition_2,
+#     partition_name="partitionB"
+# )
+
+# client.list_partitions(collection_name="quick_setup")
+
+# Get number of entities in a partition
+# client.get_partition_stats(
+#     collection_name="quick_setup",
+#     partition_name="partitionA"
+#     )
+
+# client.release_partitions(
+#     collection_name="quick_setup",
+#     partition_names=["partitionA"]
+# )
+
+# client.get_load_state(
+#     collection_name="quick_setup", 
+#     partition_name="partitionA"
+# )
+
+# client.load_partitions(
+#     collection_name="quick_setup",
+#     partition_names=["partitionA"]
+# )
+
+
+# filter_expression = "id in [11, 12, 13, 14, 15]"  # Filter expression for IDs 1 through 5
+
+# results = client.query(
+#     collection_name="quick_setup",
+#     filter=filter_expression,
+#     output_fields=["id", "vector", "color"]
+# )
+
+# for result in results:
+#     print(f"ID: {result['id']}, Vector: {result['vector']}, Color: {result['color']}")
+
+# query_vectors = [
+#     [0.041732933, 0.013779674, -0.027564144, -0.013061441, 0.009748648]
+# ]
+
+query_vectors = [
+    [0.2580376395471989, -0.5023495712049978, 0.14414012509913835, -0.22286205330961354, 0.8029438446296592]
+    ]
+
+res = client.search(
+    collection_name="quick_setup",
+    data=query_vectors,
+    output_fields=["vector", "color"],
+    limit=3,
 )
+
+# Search with a filter expression using schema-defined fields
+res = client.search(
+    collection_name="quick_setup",
+    data=query_vectors,
+    filter='$meta["color"] like "red%"',
+    output_fields=["vector", "color"],
+    limit=3
+)
+
+
+
+
+# Query the number of entities in collectin "quick_setup"
+client.query(
+    collection_name="quick_setup", 
+    output_fields=["count(*)"]
+    )
+
+client.query(
+    collection_name="quick_setup",
+    filter="1 < id < 10",
+    output_fields=["color"],
+    limit=3
+)
+
+# client.query(
+#     collection_name="quick_setup",
+#     filter='color == "pink_9298"',
+#     output_fields=["color"]
+# )
+
+# client.query(
+#     collection_name="quick_setup",
+#     filter='color like "pink%"',
+#     output_fields=["color"],
+#     limit=3
+# )
+
+# client.query(
+#     collection_name="quick_setup",
+#     filter='(color like "pink%") and (50 < id < 100)',
+#     output_fields=["color"],
+#     limit=3
+# )
+
+# client.query(
+#     collection_name="quick_setup",
+#     filter='(color like "red%") and (1 < id < 100)',
+#     output_fields=["count(*)"],
+# )
+
+# 4. Get entities by ID
+# client.get(
+#     collection_name="quick_setup",
+#     ids=[0, 1, 2]
+# )
 
 print(res)
+
+print()

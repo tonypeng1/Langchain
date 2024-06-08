@@ -1,16 +1,19 @@
 import os
 
-from dotenv import load_dotenv
 import bs4
+from dotenv import load_dotenv
 from langchain import hub
-from langchain.prompts import PromptTemplate
-from langchain_community.document_loaders import WebBaseLoader
 from langchain_chroma import Chroma
+from langchain_community.document_loaders import WebBaseLoader
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
-from langchain_openai import OpenAIEmbeddings
+from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+from langchain.prompts import PromptTemplate
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_openai import ChatOpenAI
+
+from langchain_community.document_loaders import TextLoader
+from langchain_community.vectorstores import Milvus
+from langchain_text_splitters import CharacterTextSplitter
 
 
 def format_docs(docs):
@@ -49,6 +52,8 @@ text_splitter = RecursiveCharacterTextSplitter(chunk_size=800,
 splits = text_splitter.split_documents(docs)
 
 vectorstore = Chroma.from_documents(documents=splits, embedding=OpenAIEmbeddings())
+
+Milvus
 
 # Retrieve and generate using the relevant snippets of the blog.
 retriever = vectorstore.as_retriever(search_type="similarity", 

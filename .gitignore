@@ -2,3 +2,4 @@
 .venv/
 .env
 Langchain_practice.egg-info/
+langchat.py
